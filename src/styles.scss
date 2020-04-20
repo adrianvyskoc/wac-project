@@ -1,1 +1,93 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.container {
+	padding: 0 13%;
+}
+
+$spaceamounts: (5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 75, 100); // Adjust this to include the pixel amounts you need.
+$sides: (top, bottom, left, right); // Leave this variable alone
+
+@each $space in $spaceamounts {
+  @each $side in $sides {
+    .m#{str-slice($side, 0, 1)}-#{$space} {
+      margin-#{$side}: #{$space}px !important;
+    }
+  
+    .p#{str-slice($side, 0, 1)}-#{$space} {
+      padding-#{$side}: #{$space}px !important;
+    }
+  }
+}
+
+.flex {
+	display: flex;
+  
+	$justify-positions: (
+		start: flex-start,
+		end: flex-end,
+		center: center,
+		around: space-around,
+		between: space-between,
+		evenly: space-evenly
+	);
+	  $align-positions: (
+		start: flex-start,
+		end: flex-end,
+		center: center,
+		stretch: stretch,
+		baseline: baseline
+	);
+  
+	@mixin just-align($name,$prop,$arr) {
+		@each $mod, $dir in $arr {
+			&--#{$name}-#{$mod} {
+				#{$prop}: #{$dir};
+			}
+		}
+	}
+  
+	@include just-align('align','align-items', $align-positions);
+	@include just-align('justify','justify-content', $justify-positions);
+}
+
+/*
+	.flex {
+	display: flex;
+	}
+	.flex--align-start {
+	align-items: flex-start;
+	}
+	.flex--align-end {
+	align-items: flex-end;
+	}
+	.flex--align-center {
+	align-items: center;
+	}
+	.flex--align-stretch {
+	align-items: stretch;
+	}
+	.flex--align-baseline {
+	align-items: baseline;
+	}
+	.flex--justify-start {
+	justify-content: flex-start;
+	}
+	.flex--justify-end {
+	justify-content: flex-end;
+	}
+	.flex--justify-center {
+	justify-content: center;
+	}
+	.flex--justify-around {
+	justify-content: space-around;
+	}
+	.flex--justify-between {
+	justify-content: space-between;
+	}
+	.flex--justify-evenly {
+	justify-content: space-evenly;
+	}
+*/
