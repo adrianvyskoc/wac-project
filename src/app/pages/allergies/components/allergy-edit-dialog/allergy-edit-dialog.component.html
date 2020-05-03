@@ -1,0 +1,30 @@
+<h1 mat-dialog-title>Allergy - {{ allergy.source }}</h1>
+<div mat-dialog-content>
+	
+	<div class="row">
+		<div class="col-lg-6">
+			<mat-form-field class="full-width" appearance="outline">
+				<mat-label>Allergy source</mat-label>
+				<input matInput>
+			</mat-form-field>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-6">
+			<mat-form-field class="full-width" appearance="outline">
+				<mat-label>Type</mat-label>
+				<select matNativeControl required>
+					<option value="volvo">Volvo</option>
+					<option value="saab">Saab</option>
+					<option value="mercedes">Mercedes</option>
+					<option value="audi">Audi</option>
+				</select>
+			</mat-form-field>
+		</div>
+	</div>
+
+</div>
+<div mat-dialog-actions>
+	<button mat-button (click)="onEdit()">Edit</button>
+	<button mat-button [mat-dialog-close]="" cdkFocusInitial>Ok</button>
+</div>
