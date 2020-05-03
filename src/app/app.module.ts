@@ -9,12 +9,6 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
-import { StoreModule } from '@ngrx/store';
-import { reducers, metaReducers } from './store';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { environment } from '../environments/environment';
-import { EffectsModule } from '@ngrx/effects';
-import { AppEffects } from './effects/app.effects';
 
 
 @NgModule({
@@ -30,16 +24,7 @@ import { AppEffects } from './effects/app.effects';
 		MatToolbarModule,
 		MatButtonModule,
 		MatIconModule,
-		StoreModule.forRoot(reducers, {
-			metaReducers, 
-			runtimeChecks: {
-				strictStateImmutability: true,
-				strictActionImmutability: true,
-			}
-		}),
-			!environment.production ? StoreDevtoolsModule.instrument() : [],
-			EffectsModule.forRoot([AppEffects])
-		],
+	],
 	providers: [],
 	bootstrap: [AppComponent]
 })
