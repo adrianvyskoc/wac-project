@@ -14,10 +14,7 @@
 			<mat-form-field class="full-width" appearance="outline">
 				<mat-label>Type</mat-label>
 				<select matNativeControl required>
-					<option value="volvo">Volvo</option>
-					<option value="saab">Saab</option>
-					<option value="mercedes">Mercedes</option>
-					<option value="audi">Audi</option>
+					<option *ngFor="let alergyType of alergy" value="volvo">Volvo</option>
 				</select>
 			</mat-form-field>
 		</div>

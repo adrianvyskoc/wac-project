@@ -2,9 +2,14 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { Allergy, AllergyType } from 'src/app/models/allergy.model';
+import { Allergy, AllergyType } from 'src/app/store/allergy/allergy.model';
 import { AllergyEditDialogComponent } from './components/allergy-edit-dialog/allergy-edit-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { Store, select } from '@ngrx/store';
+import { AmbulanceState, selectAllergiesList } from 'src/app/store/AmbulanceState';
+import * as fromAllergy from '../../store/allergy/allergy.reducer';
+import { Observable } from 'rxjs';
+
 
 @Component({
   selector: 'app-allergies',
@@ -12,6 +17,9 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./allergies.component.scss']
 })
 export class AllergiesComponent implements OnInit {
+
+	allergies: Observable<Allergy[]>;
+
 	displayedColumns: string[] = ['id', 'source', 'type', 'actions'];
   	dataSource: MatTableDataSource<Allergy>;
 
@@ -20,18 +28,18 @@ export class AllergiesComponent implements OnInit {
 	  
 	filterInputValue: string = '';
 
-  	constructor(public dialog: MatDialog) { }
+  	constructor(
+		private dialog: MatDialog,
+		private store: Store<AmbulanceState>
+	) { }
 
 	ngOnInit() {
-		this.dataSource = new MatTableDataSource([
-			{
-				id: 12,
-				source: 'Pel',
-				type: AllergyType.ENVIROMENT
-			}
-		]);
-		this.dataSource.paginator = this.paginator;
-		this.dataSource.sort = this.sort;
+		this.allergies = this.store.pipe(select(selectAllergiesList), select(fromAllergy.adapter.getSelectors().selectAll));
+		this.allergies.subscribe((allergies: Allergy[]) => {
+			this.dataSource = new MatTableDataSource(allergies);
+			this.dataSource.paginator = this.paginator;
+			this.dataSource.sort = this.sort;
+		});
 	}
 
 	onEditAllergy(allergy: Allergy): void {

@@ -15,6 +15,9 @@ import { AllergyEditDialogComponent } from './components/allergy-edit-dialog/all
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatSelectModule} from '@angular/material/select';
 
+import {StoreModule} from '@ngrx/store';
+import { reducer } from 'src/app/store/allergy/allergy.reducer';
+
 
 
 
@@ -25,6 +28,8 @@ import {MatSelectModule} from '@angular/material/select';
 	CommonModule,
 	AllergiesRoutingModule,
 	FormsModule,
+
+	StoreModule.forFeature('allergy', reducer),
 	
 	MatGridListModule,
 	MatIconModule,
