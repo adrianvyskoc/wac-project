@@ -4,11 +4,20 @@ import { Allergy } from './allergy.model';
 
 
 export const loadAllergies = createAction(
-  '[Allergy/API] Load Allergies',
-  props<{ allergies: Allergy[] }>()
+  '[Allergy/API] Load Allergies'
 );
 
-export const addAllergy = createAction(
+export const loadAllergiesSuccess = createAction(
+	'[Allergy/API] Load Allergies Success',
+	props<{ allergies: Allergy[] }>()
+);
+
+export const deleteAllergy = createAction(
+	'[Allergy/API] Delete Allergy',
+	props<{ id: number }>()
+);
+
+/*export const addAllergy = createAction(
   '[Allergy/API] Add Allergy',
   props<{ allergy: Allergy }>()
 );
@@ -38,10 +47,7 @@ export const updateAllergies = createAction(
   props<{ allergies: Update<Allergy>[] }>()
 );
 
-export const deleteAllergy = createAction(
-  '[Allergy/API] Delete Allergy',
-  props<{ id: number }>()
-);
+
 
 export const deleteAllergies = createAction(
   '[Allergy/API] Delete Allergies',
@@ -55,5 +61,5 @@ export const clearAllergies = createAction(
 export const uploadAllergy = createAction(
   '[Allergy/API] Upload Allergy',
   props<{ payload: {allergy: Allergy }}>()
-);
+);*/
 

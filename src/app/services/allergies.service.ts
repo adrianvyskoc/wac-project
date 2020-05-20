@@ -1,7 +1,4 @@
 import {Injectable} from '@angular/core';
-import {Observable, of} from 'rxjs';
-import {delay} from 'rxjs/operators';
-import * as lodash from 'lodash';
 import { AllergiesMock } from '../pages/allergies/allergies.mock';
 import { Allergy } from '../store/allergy/allergy.model';
 
@@ -11,7 +8,7 @@ import { Allergy } from '../store/allergy/allergy.model';
 })
 export class AllergiesService {
 
-  patients: Allergy[] = Object.assign([], AllergiesMock.allergies);
+  allergies: Allergy[] = Object.assign([], AllergiesMock.allergies);
 
   constructor() {
   }

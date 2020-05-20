@@ -22,7 +22,7 @@ const vaccineReducer = createReducer(
   ),
   on(VaccineActions.upsertVaccine,
     (state, action) => {
-    return adapter.upsertOne(action.vaccine, state);
+    	return adapter.upsertOne(action.vaccine, state);
     }
   ),
   on(VaccineActions.addVaccines,
