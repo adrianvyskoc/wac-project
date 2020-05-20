@@ -9,4 +9,5 @@ export interface Allergy {
 	id: number;	
 	source: string;
 	type: AllergyType;
+	diagnosed_at: Date;
 }

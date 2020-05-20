@@ -8,8 +8,6 @@
 				<input matInput>
 			</mat-form-field>
 		</div>
-	</div>
-	<div class="row">
 		<div class="col-lg-6">
 			<mat-form-field class="full-width" appearance="outline">
 				<mat-label>Type</mat-label>
@@ -19,9 +17,19 @@
 			</mat-form-field>
 		</div>
 	</div>
-
+	<div class="row">
+		<div class="col-lg-6">
+			<mat-form-field class="full-width" appearance="outline">
+				<mat-label>Diagnosed at</mat-label>
+				<input matInput [matDatepicker]="picker">
+				<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+				<mat-datepicker #picker></mat-datepicker>
+			</mat-form-field>
+		</div>
+	</div>
+	
 </div>
 <div mat-dialog-actions>
-	<button mat-button (click)="onEdit()">Edit</button>
-	<button mat-button [mat-dialog-close]="" cdkFocusInitial>Ok</button>
+	<button mat-flat-button color="primary" (click)="onEdit()">Edit</button>
+	<button mat-stroked-button [mat-dialog-close]="" cdkFocusInitial>Cancel</button>
 </div>

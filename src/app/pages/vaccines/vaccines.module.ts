@@ -9,6 +9,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { MatSortModule } from '@angular/material/sort';
 	MatTableModule,
 	MatIconModule,
 	MatPaginatorModule,
-	MatSortModule
+	MatSortModule,
+	MatButtonModule
   ]
 })
 export class VaccinesModule { }

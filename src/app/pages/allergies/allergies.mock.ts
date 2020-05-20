@@ -6,7 +6,8 @@ export class AllergiesMock {
 		{
 			id: 12,
 			source: 'Pel',
-			type: AllergyType.ENVIROMENT
+			type: AllergyType.ENVIROMENT,
+			diagnosed_at: new Date()
 		}
 	];
 }

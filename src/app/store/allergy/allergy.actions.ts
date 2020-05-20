@@ -40,7 +40,7 @@ export const updateAllergies = createAction(
 
 export const deleteAllergy = createAction(
   '[Allergy/API] Delete Allergy',
-  props<{ id: string }>()
+  props<{ id: number }>()
 );
 
 export const deleteAllergies = createAction(

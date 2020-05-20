@@ -37,6 +37,11 @@
 				<th mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
 				<td mat-cell *matCellDef="let row"> {{row.type}} </td>
 			</ng-container>
+			
+			<ng-container matColumnDef="diagnosed_at">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header> Diagnosed at </th>
+				<td mat-cell *matCellDef="let row"> {{row.diagnosed_at | date:'medium'}} </td>
+			</ng-container>
 
 			<ng-container matColumnDef="actions">
 				<th mat-header-cell *matHeaderCellDef mat-sort-header> Actions </th>
@@ -44,7 +49,7 @@
 					<button mat-icon-button color="accent" (click)="onEditAllergy(row)">
 						<mat-icon>edit</mat-icon>
 					</button>
-					<button mat-icon-button color="warn">
+					<button mat-icon-button color="warn" (click)="onDeleteAllergy(row)">
 						<mat-icon>delete</mat-icon>
 					</button>
 				</td>

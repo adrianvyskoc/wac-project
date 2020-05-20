@@ -14,16 +14,17 @@ import { FormsModule } from '@angular/forms';
 import { AllergyEditDialogComponent } from './components/allergy-edit-dialog/allergy-edit-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatSelectModule} from '@angular/material/select';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 import {StoreModule} from '@ngrx/store';
 import { reducer } from 'src/app/store/allergy/allergy.reducer';
-
-
-
+import { ConfirmDialogModule } from 'src/app/shared/components/confirm-dialog/confirm-dialog.module';
+import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [AllergiesComponent, AllergyEditDialogComponent],
-  entryComponents: [AllergyEditDialogComponent],
+  entryComponents: [AllergyEditDialogComponent, ConfirmDialogComponent],
   imports: [
 	CommonModule,
 	AllergiesRoutingModule,
@@ -40,7 +41,11 @@ import { reducer } from 'src/app/store/allergy/allergy.reducer';
 	MatFormFieldModule,
 	MatInputModule,
 	MatDialogModule,
-	MatSelectModule
+	MatSelectModule,
+	MatDatepickerModule,
+	MatNativeDateModule,
+
+	ConfirmDialogModule
   ]
 })
 export class AllergiesModule { }

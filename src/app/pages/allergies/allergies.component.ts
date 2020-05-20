@@ -9,7 +9,8 @@ import { Store, select } from '@ngrx/store';
 import { AmbulanceState, selectAllergiesList } from 'src/app/store/AmbulanceState';
 import * as fromAllergy from '../../store/allergy/allergy.reducer';
 import { Observable } from 'rxjs';
-
+import { deleteAllergy } from 'src/app/store/allergy/allergy.actions';
+import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-allergies',
@@ -20,7 +21,7 @@ export class AllergiesComponent implements OnInit {
 
 	allergies: Observable<Allergy[]>;
 
-	displayedColumns: string[] = ['id', 'source', 'type', 'actions'];
+	displayedColumns: string[] = ['id', 'source', 'type', 'diagnosed_at', 'actions'];
   	dataSource: MatTableDataSource<Allergy>;
 
 	@ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -50,6 +51,18 @@ export class AllergiesComponent implements OnInit {
 	
 		dialogRef.afterClosed().subscribe(result => {
 			// hey
+		});
+	}
+
+	onDeleteAllergy(allergy: Allergy): void {
+		const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+			width: '25%',
+			data: 'Do you really want to delete this allergy?'
+	  });
+
+		dialogRef.afterClosed().subscribe(result => {
+			if (result) 
+				this.store.dispatch(deleteAllergy({ id: allergy.id }));
 		});
 	}
 
