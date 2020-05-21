@@ -21,6 +21,8 @@ import { reducer } from 'src/app/store/allergy/allergy.reducer';
 import { ConfirmDialogModule } from 'src/app/shared/components/confirm-dialog/confirm-dialog.module';
 import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
 import { MatNativeDateModule } from '@angular/material/core';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+
 
 @NgModule({
   declarations: [AllergiesComponent, AllergyEditDialogComponent],
@@ -44,7 +46,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 	MatSelectModule,
 	MatDatepickerModule,
 	MatNativeDateModule,
-
+	MatSnackBarModule,
+	
 	ConfirmDialogModule
   ]
 })

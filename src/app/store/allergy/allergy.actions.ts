@@ -17,14 +17,15 @@ export const deleteAllergy = createAction(
 	props<{ id: number }>()
 );
 
+export const updateAllergy = createAction(
+	'[Allergy/API] Update Allergy',
+	props<{ allergy: Update<Allergy> }>()
+);
+
+/*
 export const upsertAllergy = createAction(
 	'[Allergy/API] Upsert Allergy',
 	props<{ allergy: Allergy }>()
-);
-
-/*export const updateAllergy = createAction(
-	'[Allergy/API] Update Allergy',
-	props<{ allergy: Update<Allergy> }>()
 );
 
 export const addAllergy = createAction(

@@ -5,11 +5,13 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Allergy } from 'src/app/store/allergy/allergy.model';
 import { AllergyEditDialogComponent } from './components/allergy-edit-dialog/allergy-edit-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import { Store } from '@ngrx/store';
+import { Store, UPDATE } from '@ngrx/store';
 import { AmbulanceState, selectAllergiesList } from 'src/app/store/AmbulanceState';
 import { Observable } from 'rxjs';
-import { deleteAllergy, loadAllergies, upsertAllergy } from 'src/app/store/allergy/allergy.actions';
+import { deleteAllergy, loadAllergies, updateAllergy } from 'src/app/store/allergy/allergy.actions';
 import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Update } from '@ngrx/entity';
 
 @Component({
   selector: 'app-allergies',
@@ -30,7 +32,8 @@ export class AllergiesComponent implements OnInit {
 
   	constructor(
 		private dialog: MatDialog,
-		private store: Store<AmbulanceState>
+		private store: Store<AmbulanceState>,
+		private _snackBar: MatSnackBar
 	) { }
 
 	ngOnInit() {
@@ -49,19 +52,33 @@ export class AllergiesComponent implements OnInit {
 		});
 	
 		dialogRef.afterClosed().subscribe((updatedAllergy: Allergy) => {
-			this.store.dispatch(upsertAllergy({ allergy: updatedAllergy }));
+			const updates: Update<Allergy> = {
+				id: updatedAllergy.id,
+				changes: {
+					...updatedAllergy
+				}
+			}
+
+			this.store.dispatch(updateAllergy({ allergy: updates }));
+			this._snackBar.open('Allergy has been successfully edited.', '', {
+				duration: 2000
+			});
 		});
 	}
 
 	onDeleteAllergy(allergy: Allergy): void {
 		const dialogRef = this.dialog.open(ConfirmDialogComponent, {
 			width: '25%',
-			data: 'Do you really want to delete this allergy?'
+			data: 'Are you sure that you want to delete this allergy?'
 	  });
 
 		dialogRef.afterClosed().subscribe(result => {
-			if (result) 
+			if (result) {
 				this.store.dispatch(deleteAllergy({ id: allergy.id }));
+				this._snackBar.open('Allergy has been successfully deleted.', '', {
+					duration: 2000
+				});
+			}
 		});
 	}
 

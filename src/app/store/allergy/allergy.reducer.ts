@@ -26,13 +26,14 @@ const allergyReducer = createReducer(
 		(state, action) => adapter.removeOne(action.id, state)
 	),
 
+	on(AllergyActions.updateAllergy,
+		(state, action) => adapter.updateOne(action.allergy, state)
+	)
+
+		/*
 	on(AllergyActions.upsertAllergy,
 		(state, action) => adapter.upsertOne(action.allergy, state)
 	),
-
-	/*on(AllergyActions.updateAllergy,
-		(state, action) => adapter.updateOne(action.allergy, state)
-	)
 	
 	
 	on(AllergyActions.addAllergy,
