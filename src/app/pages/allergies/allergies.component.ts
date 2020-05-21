@@ -70,7 +70,7 @@ export class AllergiesComponent implements OnInit {
 		const dialogRef = this.dialog.open(ConfirmDialogComponent, {
 			width: '25%',
 			data: 'Are you sure that you want to delete this allergy?'
-	  });
+	  	});
 
 		dialogRef.afterClosed().subscribe(result => {
 			if (result) {
