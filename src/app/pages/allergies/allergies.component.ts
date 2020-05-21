@@ -8,7 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Store, UPDATE } from '@ngrx/store';
 import { AmbulanceState, selectAllergiesList } from 'src/app/store/AmbulanceState';
 import { Observable } from 'rxjs';
-import { deleteAllergy, loadAllergies, updateAllergy } from 'src/app/store/allergy/allergy.actions';
+import { deleteAllergy, loadAllergies, updateAllergy, addAllergy } from 'src/app/store/allergy/allergy.actions';
 import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Update } from '@ngrx/entity';
@@ -42,6 +42,19 @@ export class AllergiesComponent implements OnInit {
 			this.dataSource = new MatTableDataSource(allergies);
 			this.dataSource.paginator = this.paginator;
 			this.dataSource.sort = this.sort;
+		});
+	}
+
+	onAddAllergy(): void {
+		const dialogRef = this.dialog.open(AllergyEditDialogComponent, {
+			width: '50%'
+	  	});
+
+		dialogRef.afterClosed().subscribe((newAllergy: Allergy) => {
+			this.store.dispatch(addAllergy({ allergy: newAllergy }));
+			this._snackBar.open('Allergy has been successfully created.', '', {
+				duration: 2000
+			});
 		});
 	}
 

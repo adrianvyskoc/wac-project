@@ -22,15 +22,15 @@ export const updateAllergy = createAction(
 	props<{ allergy: Update<Allergy> }>()
 );
 
+export const addAllergy = createAction(
+	'[Allergy/API] Add Allergy',
+	props<{ allergy: Allergy }>()
+);
+
 /*
 export const upsertAllergy = createAction(
 	'[Allergy/API] Upsert Allergy',
 	props<{ allergy: Allergy }>()
-);
-
-export const addAllergy = createAction(
-  '[Allergy/API] Add Allergy',
-  props<{ allergy: Allergy }>()
 );
 
 export const upsertAllergy = createAction(

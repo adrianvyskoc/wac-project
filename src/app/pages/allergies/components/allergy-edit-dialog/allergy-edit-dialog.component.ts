@@ -12,6 +12,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class AllergyEditDialogComponent implements OnInit {
 
 	formData: Allergy;
+	title: string;
+	editMode: boolean;
 
 	constructor(
 		public dialogRef: MatDialogRef<AllergyEditDialogComponent>,
@@ -20,13 +22,26 @@ export class AllergyEditDialogComponent implements OnInit {
 	) { }
 
 	ngOnInit() {
-		this.formData = { ...this.allergy };
+		this.editMode = !!this.allergy;
+
+		if (this.editMode) {
+			this.formData = { ...this.allergy };
+			this.title = 'Edit Allergy';
+		} else { 
+			this.formData = {
+				id: -1,
+				source: '',
+				type: null,
+				diagnosed_at: new Date()
+			}
+			this.title = 'Create new Allergy';
+		}
 	}
 
 	onSubmit(form: NgForm) {
 		if (form.valid) 
 			this.dialogRef.close({
-				id: this.allergy.id,
+				id: this.formData.id,
 				...form.value
 			});
 		else 
