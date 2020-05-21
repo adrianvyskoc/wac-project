@@ -8,7 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { AmbulanceState, selectAllergiesList } from 'src/app/store/AmbulanceState';
 import { Observable } from 'rxjs';
-import { deleteAllergy, loadAllergies } from 'src/app/store/allergy/allergy.actions';
+import { deleteAllergy, loadAllergies, upsertAllergy } from 'src/app/store/allergy/allergy.actions';
 import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
 
 @Component({
@@ -48,8 +48,8 @@ export class AllergiesComponent implements OnInit {
 		  	data: allergy
 		});
 	
-		dialogRef.afterClosed().subscribe(result => {
-			// hey
+		dialogRef.afterClosed().subscribe((updatedAllergy: Allergy) => {
+			this.store.dispatch(upsertAllergy({ allergy: updatedAllergy }));
 		});
 	}
 

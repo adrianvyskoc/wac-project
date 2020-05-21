@@ -5,13 +5,13 @@
 			<div class="col-lg-6">
 				<mat-form-field class="full-width" appearance="outline">
 					<mat-label>Allergy source</mat-label>
-					<input ngModel name="source" matInput required>
+					<input [(ngModel)]="allergy.source" name="source" matInput required>
 				</mat-form-field>
 			</div>
 			<div class="col-lg-6">
 				<mat-form-field class="full-width" appearance="outline">
 					<mat-label>Type</mat-label>
-					<select ngModel name="type" matNativeControl required>
+					<select [(ngModel)]="allergy.type" name="type" matNativeControl required>
 						<option *ngFor="let alergyType of alergy" value="volvo">Volvo</option>
 					</select>
 				</mat-form-field>
@@ -21,7 +21,7 @@
 			<div class="col-lg-6">
 				<mat-form-field class="full-width" appearance="outline">
 					<mat-label>Diagnosed at</mat-label>
-					<input ngModel name="diagnosed_at" matInput [matDatepicker]="picker" required>
+					<input [(ngModel)]="allergy.diagnosed_at" name="diagnosed_at" matInput [matDatepicker]="picker" required>
 					<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
 					<mat-datepicker #picker></mat-datepicker>
 				</mat-form-field>
