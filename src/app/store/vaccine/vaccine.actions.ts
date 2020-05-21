@@ -18,11 +18,6 @@ export const upsertVaccine = createAction(
   props<{ vaccine: Vaccine }>()
 );
 
-export const addVaccines = createAction(
-  '[Vaccine/API] Add Vaccines',
-  props<{ vaccines: Vaccine[] }>()
-);
-
 export const upsertVaccines = createAction(
   '[Vaccine/API] Upsert Vaccines',
   props<{ vaccines: Vaccine[] }>()
@@ -33,11 +28,6 @@ export const updateVaccine = createAction(
   props<{ vaccine: Update<Vaccine> }>()
 );
 
-export const updateVaccines = createAction(
-  '[Vaccine/API] Update Vaccines',
-  props<{ vaccines: Update<Vaccine>[] }>()
-);
-
 export const deleteVaccine = createAction(
   '[Vaccine/API] Delete Vaccine',
   props<{ id: string }>()
@@ -46,10 +36,6 @@ export const deleteVaccine = createAction(
 export const deleteVaccines = createAction(
   '[Vaccine/API] Delete Vaccines',
   props<{ ids: string[] }>()
-);
-
-export const clearVaccines = createAction(
-  '[Vaccine/API] Clear Vaccines'
 );
 
 export const uploadVaccine = createAction(

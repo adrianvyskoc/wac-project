@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Allergy } from 'src/app/store/allergy/allergy.model';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-allergy-edit-dialog',
@@ -17,4 +18,7 @@ export class AllergyEditDialogComponent implements OnInit {
   ngOnInit() {
   }
 
+  onSubmit(form: NgForm) {
+	debugger;
+  }
 }

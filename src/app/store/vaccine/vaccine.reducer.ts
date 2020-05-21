@@ -25,17 +25,11 @@ const vaccineReducer = createReducer(
     	return adapter.upsertOne(action.vaccine, state);
     }
   ),
-  on(VaccineActions.addVaccines,
-    (state, action) => adapter.addMany(action.vaccines, state)
-  ),
   on(VaccineActions.upsertVaccines,
     (state, action) => adapter.upsertMany(action.vaccines, state)
   ),
   on(VaccineActions.updateVaccine,
     (state, action) => adapter.updateOne(action.vaccine, state)
-  ),
-  on(VaccineActions.updateVaccines,
-    (state, action) => adapter.updateMany(action.vaccines, state)
   ),
   on(VaccineActions.deleteVaccine,
     (state, action) => adapter.removeOne(action.id, state)
@@ -45,10 +39,7 @@ const vaccineReducer = createReducer(
   ),
   on(VaccineActions.loadVaccines,
     (state, action) => adapter.setAll(action.vaccines, state)
-  ),
-  on(VaccineActions.clearVaccines,
-    state => adapter.removeAll(state)
-  ),
+  )
 );
 
 export function reducer(state: State | undefined, action: Action) {
