@@ -10,10 +10,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatButtonModule } from '@angular/material/button';
+import { VaccinesUpcomingComponent } from './vaccines-upcoming/vaccines-upcoming.component';
+import { VaccinesPreviousComponent } from './vaccines-previous/vaccines-previous.component';
 
 
 @NgModule({
-  declarations: [VaccinesComponent],
+  declarations: [VaccinesComponent, VaccinesUpcomingComponent, VaccinesPreviousComponent],
   imports: [
 	CommonModule,
 	FormsModule,

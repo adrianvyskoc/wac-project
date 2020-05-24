@@ -4,9 +4,13 @@ import { Vaccine } from './vaccine.model';
 
 
 export const loadVaccines = createAction(
-  '[Vaccine/API] Load Vaccines',
-  props<{ vaccines: Vaccine[] }>()
+  '[Vaccine/API] Load Vaccines'
 );
+
+export const loadVaccinesSuccess = createAction(
+	'[Vaccine/API] Load Vaccines Success',
+	props<{ vaccines: Vaccine[] }>()
+  );
 
 export const addVaccine = createAction(
   '[Vaccine/API] Add Vaccine',

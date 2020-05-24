@@ -29,8 +29,14 @@ export interface AmbulanceState {
 }
 
 export const selectAllergies = createFeatureSelector<AmbulanceState, fromAllergy.State>(fromAllergy.allergiesFeatureKey);
+export const selectVaccines = createFeatureSelector<AmbulanceState, fromVaccine.State>(fromVaccine.vaccinesFeatureKey);
 
 export const selectAllergiesList = createSelector(
 	selectAllergies,
 	fromAllergy.selectAll
+);
+
+export const selectVaccinesList = createSelector(
+	selectVaccines,
+	fromVaccine.selectAll
 );

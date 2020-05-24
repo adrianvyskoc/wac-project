@@ -5,8 +5,11 @@ import { MatPaginator } from '@angular/material/paginator';
 import { Vaccine } from 'src/app/store/vaccine/vaccine.model';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
-import { AmbulanceState } from 'src/app/store/AmbulanceState';
+import { AmbulanceState, selectVaccinesList } from 'src/app/store/AmbulanceState';
 import * as fromVaccine from '../../store/vaccine/vaccine.reducer';
+import { updateVaccine, loadVaccines } from 'src/app/store/vaccine/vaccine.actions';
+import { Update } from '@ngrx/entity';
+
 
 @Component({
 	selector: 'app-vaccines',
@@ -27,8 +30,8 @@ export class VaccinesComponent implements OnInit {
 	  ) { }
 
 	ngOnInit() {
-		//this.vaccines = this.store.pipe(select(selectVaccinesList), select(fromVaccine.adapter.getSelectors().selectAll));
-		this.vaccines.subscribe((vaccines: Vaccine[]) => {
+		this.store.dispatch(loadVaccines());
+		this.store.select(selectVaccinesList).subscribe((vaccines: Vaccine[]) => {
 			this.dataSource = new MatTableDataSource(vaccines);
 			this.dataSource.paginator = this.paginator;
 			this.dataSource.sort = this.sort;
@@ -36,7 +39,14 @@ export class VaccinesComponent implements OnInit {
 	}
 
 	onMarkAsCompleted(vaccine: Vaccine) {
+		const updates: Update<Vaccine> = {
+			id: vaccine.id,
+			changes: {
+				completed: true
+			}
+		}
 
+		this.store.dispatch(updateVaccine({ vaccine: updates }))
 	}
 
 }

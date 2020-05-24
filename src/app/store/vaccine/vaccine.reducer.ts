@@ -3,7 +3,7 @@ import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import * as VaccineActions from './vaccine.actions';
 import { Vaccine } from './vaccine.model';
 
-export const vaccinesFeatureKey = 'vaccines';
+export const vaccinesFeatureKey = 'vaccine';
 
 export interface State extends EntityState<Vaccine> {
   // additional entities state properties
@@ -21,9 +21,7 @@ const vaccineReducer = createReducer(
     (state, action) => adapter.addOne(action.vaccine, state)
   ),
   on(VaccineActions.upsertVaccine,
-    (state, action) => {
-    	return adapter.upsertOne(action.vaccine, state);
-    }
+    (state, action) => adapter.upsertOne(action.vaccine, state)
   ),
   on(VaccineActions.upsertVaccines,
     (state, action) => adapter.upsertMany(action.vaccines, state)
@@ -37,7 +35,7 @@ const vaccineReducer = createReducer(
   on(VaccineActions.deleteVaccines,
     (state, action) => adapter.removeMany(action.ids, state)
   ),
-  on(VaccineActions.loadVaccines,
+  on(VaccineActions.loadVaccinesSuccess,
     (state, action) => adapter.setAll(action.vaccines, state)
   )
 );

@@ -16,7 +16,7 @@ import {StoreRouterConnectingModule} from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { AllergiesEffects } from './effects/allergies.effects';
-
+import { VaccinesEffects } from './effects/vaccines.effects';
 
 @NgModule({
 	declarations: [
@@ -37,7 +37,8 @@ import { AllergiesEffects } from './effects/allergies.effects';
 		StoreRouterConnectingModule.forRoot(),
 		!environment.production ? StoreDevtoolsModule.instrument() : [],
 		EffectsModule.forRoot([
-			AllergiesEffects
+			AllergiesEffects,
+			VaccinesEffects
 		]),
 		
 		MatExpansionModule,
