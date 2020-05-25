@@ -1,14 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { Vaccine } from 'src/app/store/vaccine/vaccine.model';
-import { Observable } from 'rxjs';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { AmbulanceState, selectVaccinesList } from 'src/app/store/AmbulanceState';
-import * as fromVaccine from '../../store/vaccine/vaccine.reducer';
-import { updateVaccine, loadVaccines } from 'src/app/store/vaccine/vaccine.actions';
-import { Update } from '@ngrx/entity';
+import { loadVaccines } from 'src/app/store/vaccine/vaccine.actions';
 
 
 @Component({
@@ -16,11 +12,11 @@ import { Update } from '@ngrx/entity';
 	templateUrl: './vaccines.component.html',
 	styleUrls: ['./vaccines.component.scss']
 })
-export class VaccinesComponent implements OnInit {
-	displayedColumns: string[] = ['id', 'completed', 'duration', 'vaccined_at', 'against', 'actions'];
-	dataSource: MatTableDataSource<Vaccine>;
-	  
-	vaccines: Observable<Vaccine[]>;
+export class VaccinesComponent implements OnInit {  
+	vaccines: {
+		completed: Vaccine[],
+		upcoming: Vaccine[]
+	};
 
 	@ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 	@ViewChild(MatSort, {static: true}) sort: MatSort;
@@ -32,21 +28,14 @@ export class VaccinesComponent implements OnInit {
 	ngOnInit() {
 		this.store.dispatch(loadVaccines());
 		this.store.select(selectVaccinesList).subscribe((vaccines: Vaccine[]) => {
-			this.dataSource = new MatTableDataSource(vaccines);
-			this.dataSource.paginator = this.paginator;
-			this.dataSource.sort = this.sort;
+
+			this.vaccines = vaccines.reduce((acc, vaccine) => {
+				acc[vaccine.completed ? 'completed' : 'upcoming'].push(vaccine);
+				return acc;
+			}, { completed: [], upcoming: [] });
 		});
 	}
 
-	onMarkAsCompleted(vaccine: Vaccine) {
-		const updates: Update<Vaccine> = {
-			id: vaccine.id,
-			changes: {
-				completed: true
-			}
-		}
-
-		this.store.dispatch(updateVaccine({ vaccine: updates }))
-	}
+	
 
 }
