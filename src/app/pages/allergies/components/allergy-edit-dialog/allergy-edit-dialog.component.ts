@@ -39,14 +39,15 @@ export class AllergyEditDialogComponent implements OnInit {
 	}
 
 	onSubmit(form: NgForm) {
-		if (form.valid) 
+		if (form.valid) {
 			this.dialogRef.close({
 				id: this.formData.id,
 				...form.value
 			});
-		else 
+		} else {
 			this._snackBar.open('Fill all required fields.', '', {
 				duration: 2000
 			});
+		}
 	}
 }
