@@ -12,6 +12,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatButtonModule } from '@angular/material/button';
 import { VaccinesUpcomingComponent } from './vaccines-upcoming/vaccines-upcoming.component';
 import { VaccinesPreviousComponent } from './vaccines-previous/vaccines-previous.component';
+import { MatDividerModule } from '@angular/material/divider';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { VaccinesPreviousComponent } from './vaccines-previous/vaccines-previous
 	MatIconModule,
 	MatPaginatorModule,
 	MatSortModule,
-	MatButtonModule
+	MatButtonModule,
+	MatDividerModule
   ]
 })
 export class VaccinesModule { }
