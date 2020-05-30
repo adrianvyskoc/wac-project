@@ -6,7 +6,8 @@ export enum AllergyType {
 }
 
 export interface Allergy {
-	id: number;	
+	id: string;
+	patient_id: string;	
 	source: string;
 	type: AllergyType;
 	diagnosed_at: Date;

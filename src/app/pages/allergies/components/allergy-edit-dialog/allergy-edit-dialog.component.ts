@@ -29,10 +29,11 @@ export class AllergyEditDialogComponent implements OnInit {
 			this.title = 'Edit Allergy';
 		} else { 
 			this.formData = {
-				id: -1,
+				id: '',
 				source: '',
 				type: null,
-				diagnosed_at: new Date()
+				diagnosed_at: new Date(),
+				patient_id: ''
 			}
 			this.title = 'Create new Allergy';
 		}
