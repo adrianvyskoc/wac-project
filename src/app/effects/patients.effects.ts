@@ -4,9 +4,13 @@ import {map} from 'rxjs/operators';
 import { loadPatients, loadPatientsSuccess } from '../store/patients/patient.actions';
 import { PatientsService } from '../services/patients.service';
 import { PatientsMock } from '../pages/patients/patients.mock';
+import { Patient } from '../store/patients/patient.model';
 
 @Injectable()
 export class PatientsEffects {
+
+	useMocks: boolean = true;
+
 	constructor(
 		private actions$: Actions,
 		private patientsService: PatientsService
@@ -16,8 +20,14 @@ export class PatientsEffects {
 		() => this.actions$.pipe(
 			ofType(loadPatients),
 			map(_ => {
-				const {patients} = PatientsMock;
-				return loadPatientsSuccess({patients});
+				if (this.useMocks) {
+					const {patients} = PatientsMock;
+					return loadPatientsSuccess({patients});
+				} else {
+					this.patientsService.loadPatients().subscribe((patients: Patient[]) => {
+						loadPatientsSuccess({patients});
+					});
+				}
 			})
 		)
 	);	

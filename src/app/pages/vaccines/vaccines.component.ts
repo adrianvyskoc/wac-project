@@ -5,6 +5,7 @@ import { Vaccine } from 'src/app/store/vaccine/vaccine.model';
 import { Store } from '@ngrx/store';
 import { AmbulanceState, selectVaccinesList } from 'src/app/store/AmbulanceState';
 import { loadVaccines } from 'src/app/store/vaccine/vaccine.actions';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -22,11 +23,12 @@ export class VaccinesComponent implements OnInit {
 	@ViewChild(MatSort, {static: true}) sort: MatSort;
 
   	constructor(
+		private route: ActivatedRoute,
 		private store: Store<AmbulanceState>
 	  ) { }
 
 	ngOnInit() {
-		this.store.dispatch(loadVaccines());
+		this.store.dispatch(loadVaccines({ patientId: this.route.snapshot.params.id }));
 		this.store.select(selectVaccinesList).subscribe((vaccines: Vaccine[]) => {
 
 			this.vaccines = vaccines.reduce((acc, vaccine) => {

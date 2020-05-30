@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import { Vaccine } from '../store/vaccine/vaccine.model';
-import { VaccinesMock } from '../pages/vaccines/vaccines.mock';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 
 @Injectable({
@@ -8,9 +9,12 @@ import { VaccinesMock } from '../pages/vaccines/vaccines.mock';
 })
 export class VaccinesService {
 
-  vaccines: Vaccine[] = Object.assign([], VaccinesMock.vaccines);
+	constructor(
+		private http: HttpClient
+	) {}
 
-  constructor() {
-  }
+	loadVaccines(patientId: string): Observable<Vaccine[]> {
+		return this.http.get<Vaccine[]>('https://');
+	}
 
 }

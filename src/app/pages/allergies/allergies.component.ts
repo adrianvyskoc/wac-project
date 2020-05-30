@@ -12,6 +12,7 @@ import { deleteAllergy, loadAllergies, updateAllergy, addAllergy } from 'src/app
 import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Update } from '@ngrx/entity';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-allergies',
@@ -31,13 +32,14 @@ export class AllergiesComponent implements OnInit {
 	filterInputValue: string = '';
 
   	constructor(
+		private route: ActivatedRoute,
 		private dialog: MatDialog,
 		private store: Store<AmbulanceState>,
 		private _snackBar: MatSnackBar
 	) { }
 
 	ngOnInit() {
-		this.store.dispatch(loadAllergies());
+		this.store.dispatch(loadAllergies({ patientId: this.route.snapshot.params.id }));
 		this.store.select(selectAllergiesList).subscribe((allergies: Allergy[]) => {
 			this.dataSource = new MatTableDataSource(allergies);
 			this.dataSource.paginator = this.paginator;

@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
-import { PatientsMock } from '../pages/patients/patients.mock';
 import { Patient } from '../store/patients/patient.model';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 
 @Injectable({
@@ -8,13 +9,12 @@ import { Patient } from '../store/patients/patient.model';
 })
 export class PatientsService {
 
-  patients: Patient[] = Object.assign([], PatientsMock.patients);
+	constructor(
+		private http: HttpClient
+	) {}
 
-  constructor() {
-  }
-
-  loadPatients() {
-
-  }
+	loadPatients(): Observable<Patient[]> {
+		return this.http.get<Patient[]>('https://');
+	}
 
 }

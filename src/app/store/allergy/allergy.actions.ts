@@ -4,7 +4,8 @@ import { Allergy } from './allergy.model';
 
 
 export const loadAllergies = createAction(
-  '[Allergy/API] Load Allergies'
+  '[Allergy/API] Load Allergies',
+  props<{ patientId: string }>()
 );
 
 export const loadAllergiesSuccess = createAction(
