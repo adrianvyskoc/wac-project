@@ -33,7 +33,7 @@ export class VaccinesPreviousComponent implements OnChanges {
 	makeSameVaccineAsUpcoming(vaccine: Vaccine) {
 		this.store.dispatch(addVaccine({ vaccine: {
 			...vaccine,
-			id: -1,
+			id: '',
 			completed: false
 		} }));
 	}
